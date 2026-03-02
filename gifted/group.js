@@ -1206,7 +1206,8 @@ gmd(
 
           if (
             presence?.lastKnownPresence === "composing" ||
-            presence?.lastKnownPresence === "recording"
+            presence?.lastKnownPresence === "recording" ||
+            presence?.lastKnownPresence === "available"
           ) {
             let displayJid = participantId;
             if (participantId.endsWith("@lid")) {
@@ -1499,10 +1500,8 @@ gmd(
     description: "Send text or quoted media to group status. Superuser only.",
   },
   async (from, Gifted, conText) => {
-    const { reply, react, isSuperUser, isGroup, q, quoted, quotedMsg, mek } = conText;
+    const { reply, react, isSuperUser, isGroup, q, quoted, quotedMsg, mek, formatAudio, formatVideo } = conText;
     const { downloadMediaMessage } = require("gifted-baileys");
-    const fs = require("fs");
-    const path = require("path");
 
     if (!isGroup) return reply("❌ Group only command!");
     if (!isSuperUser) return reply("❌ Owner Only Command!");
@@ -1516,15 +1515,10 @@ gmd(
       );
     }
 
-    let tempFilePath = null;
-
     try {
-      let payload = { groupStatusMessage: {} };
+      let statusPayload = {};
 
       if (quotedMsg) {
-        const tempDir = "gift/temp";
-        if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir, { recursive: true });
-
         if (quoted?.imageMessage) {
           const caption = q || quoted.imageMessage.caption || "";
           const buffer = await downloadMediaMessage(
@@ -1532,80 +1526,55 @@ gmd(
             "buffer",
             {},
           );
-          tempFilePath = path.join(tempDir, `status_${Date.now()}.jpg`);
-          fs.writeFileSync(tempFilePath, buffer);
-          payload.groupStatusMessage.image = { url: tempFilePath };
-          if (caption) payload.groupStatusMessage.caption = caption;
+          statusPayload = { 
+            image: buffer,
+            mimetype: "image/jpeg"
+          };
+          if (caption) statusPayload.caption = caption;
         } else if (quoted?.videoMessage) {
           const caption = q || quoted.videoMessage.caption || "";
-          const buffer = await downloadMediaMessage(
+          let buffer = await downloadMediaMessage(
             { message: quotedMsg },
             "buffer",
             {},
           );
-          tempFilePath = path.join(tempDir, `status_${Date.now()}.mp4`);
-          fs.writeFileSync(tempFilePath, buffer);
-          payload.groupStatusMessage.video = { url: tempFilePath };
-          if (caption) payload.groupStatusMessage.caption = caption;
+          buffer = await formatVideo(buffer);
+          statusPayload = { 
+            video: buffer,
+            mimetype: "video/mp4"
+          };
+          if (caption) statusPayload.caption = caption;
         } else if (quoted?.audioMessage) {
-          const buffer = await downloadMediaMessage(
+          let buffer = await downloadMediaMessage(
             { message: quotedMsg },
             "buffer",
             {},
           );
-          tempFilePath = path.join(tempDir, `status_${Date.now()}.mp3`);
-          fs.writeFileSync(tempFilePath, buffer);
-          payload.groupStatusMessage.audio = { url: tempFilePath };
-        } else if (quoted?.documentMessage) {
-          const buffer = await downloadMediaMessage(
-            { message: quotedMsg },
-            "buffer",
-            {},
-          );
-          const ext =
-            quoted.documentMessage.fileName?.split(".").pop() || "bin";
-          tempFilePath = path.join(tempDir, `status_${Date.now()}.${ext}`);
-          fs.writeFileSync(tempFilePath, buffer);
-          payload.groupStatusMessage.document = { url: tempFilePath };
-        } else if (quoted?.stickerMessage) {
-          const buffer = await downloadMediaMessage(
-            { message: quotedMsg },
-            "buffer",
-            {},
-          );
-          tempFilePath = path.join(tempDir, `status_${Date.now()}.webp`);
-          fs.writeFileSync(tempFilePath, buffer);
-          payload.groupStatusMessage.sticker = { url: tempFilePath };
+          buffer = await formatAudio(buffer);
+          statusPayload = { 
+            audio: buffer,
+            mimetype: "audio/mp4",
+            ptt: true
+          };
         } else if (quoted?.conversation || quoted?.extendedTextMessage?.text) {
-          payload.groupStatusMessage.text =
-            quoted.conversation || quoted.extendedTextMessage.text;
+          statusPayload.text = quoted.conversation || quoted.extendedTextMessage.text;
         } else {
           return reply("❌ Unsupported media type for group status.");
         }
 
-        if (
-          q &&
-          !payload.groupStatusMessage.caption &&
-          !payload.groupStatusMessage.text
-        ) {
-          payload.groupStatusMessage.caption = q;
+        if (q && !statusPayload.caption && !statusPayload.text) {
+          statusPayload.caption = q;
         }
       } else {
-        payload.groupStatusMessage.text = q;
+        statusPayload.text = q;
       }
 
-      await Gifted.sendMessage(from, payload, { quoted: mek });
+      await Gifted.giftedStatus.sendGroupStatus(from, statusPayload);
       await react("✅");
     } catch (error) {
       console.error("togroupstatus error:", error);
       await react("❌");
       return reply(`❌ Error sending group status: ${error.message}`);
-    } finally {
-      if (tempFilePath && fs.existsSync(tempFilePath)) {
-        try {
-          fs.unlinkSync(tempFilePath);
-        } catch (e) {}
-      }
     }
   },
 );
@@ -1708,7 +1677,7 @@ gmd(
   {
     pattern: "everyone",
     react: "📢",
-    aliases: ["everyone", "tag", "tagall1", "mention"],
+    aliases: ["tag", "all", "mention"],
     category: "group",
     description: "Tag everyone in the group with custom message",
   },
@@ -2000,7 +1969,7 @@ gmd(
   {
     pattern: "tagall",
     react: "📢",
-    aliases: ["all", "mentionall"],
+    aliases: ["mentionall"],
     category: "group",
     description: "Tag all group members with optional message",
   },

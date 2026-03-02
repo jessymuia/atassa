@@ -38,18 +38,6 @@ gmd(
 
 gmd(
   {
-    pattern: "chatai",
-    description: "General AI chat assistant",
-    category: "Ai",
-    filename: __filename,
-  },
-  async (from, Gifted, conText) => {
-    await queryAI("chat", conText.q, conText);
-  },
-);
-
-gmd(
-  {
     pattern: "gpt",
     aliases: ["chatgpt"],
     description: "Chat with GPT model",
@@ -76,8 +64,8 @@ gmd(
 
 gmd(
   {
-    pattern: "gpt4o",
-    aliases: ["chatgpt4o"],
+    pattern: "gpt4",
+    aliases: ["chatgpt4"],
     description: "Chat with GPT-4o model",
     category: "Ai",
     filename: __filename,
@@ -89,26 +77,14 @@ gmd(
 
 gmd(
   {
-    pattern: "gpt4o-mini",
-    aliases: ["chatgpt4o-mini"],
+    pattern: "gpt4o",
+    aliases: ["chatgpt4o"],
     description: "Chat with GPT-4o Mini (faster)",
     category: "Ai",
     filename: __filename,
   },
   async (from, Gifted, conText) => {
     await queryAI("gpt4o-mini", conText.q, conText);
-  },
-);
-
-gmd(
-  {
-    pattern: "openai",
-    description: "Chat with OpenAI model",
-    category: "Ai",
-    filename: __filename,
-  },
-  async (from, Gifted, conText) => {
-    await queryAI("openai", conText.q, conText);
   },
 );
 
@@ -124,60 +100,12 @@ gmd(
   },
 );
 
-gmd(
-  {
-    pattern: "geminipro",
-    description: "Chat with Google Gemini Pro",
-    category: "Ai",
-    filename: __filename,
-  },
-  async (from, Gifted, conText) => {
-    await queryAI("geminiaipro", conText.q, conText);
-  },
-);
 
 gmd(
   {
-    pattern: "deepseek",
-    description: "Chat with DeepSeek R1 reasoning model",
-    category: "Ai",
-    filename: __filename,
-  },
-  async (from, Gifted, conText) => {
-    await queryAI("deepseek-r1", conText.q, conText);
-  },
-);
-
-gmd(
-  {
-    pattern: "deepseekv3",
-    description: "Chat with DeepSeek V3 model",
-    category: "Ai",
-    filename: __filename,
-  },
-  async (from, Gifted, conText) => {
-    await queryAI("deepseek-v3", conText.q, conText);
-  },
-);
-
-gmd(
-  {
-    pattern: "blackbox",
-    aliases: ["blackboxai"],
-    description: "Chat with Blackbox AI (coding focused)",
-    category: "Ai",
-    filename: __filename,
-  },
-  async (from, Gifted, conText) => {
-    await queryAI("blackbox", conText.q, conText);
-  },
-);
-
-gmd(
-  {
-    pattern: "mistral",
-    aliases: ["mistralai"],
-    description: "Chat with Mistral AI model",
+    pattern: "venice",
+    aliases: ["veniceai"],
+    description: "Chat with Venice AI model",
     category: "Ai",
     filename: __filename,
   },

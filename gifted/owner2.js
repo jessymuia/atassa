@@ -817,6 +817,7 @@ gmd(
   },
   async (from, Gifted, conText) => {
     const {
+      mek,
       reply,
       react,
       isSuperUser,
@@ -843,6 +844,9 @@ gmd(
       }
 
       await Gifted.sendMessage(from, { delete: quotedKey });
+      if (mek?.key) {
+        await Gifted.sendMessage(from, { delete: mek.key });
+      }
       await react("✅");
     } catch (error) {
       await react("❌");

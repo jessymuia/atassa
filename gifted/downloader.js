@@ -156,7 +156,7 @@ gmd(
                 title: `${botName} FACEBOOK DOWNLOADER`,
                 text: `*Title:* ${title || "Facebook Video"}\n*Duration:* ${duration || "Unknown"}\n\n*Select download type:*`,
                 footer: botFooter,
-                image: thumbnail,
+                image: { url: thumbnail },
                 buttons: buttons,
             });
 
@@ -384,7 +384,7 @@ gmd(
                 title: `${botName} TIKTOK DOWNLOADER`,
                 text: `*Title:* ${title || "TikTok Video"}\n*Author:* ${author?.name || "Unknown"}\n\n*Select download type:*`,
                 footer: botFooter,
-                image: cover,
+                image: { url: cover },
                 buttons: buttons,
             });
 
@@ -556,7 +556,7 @@ gmd(
                 title: `${botName} TWITTER DOWNLOADER`,
                 text: `*Available qualities:* ${videoUrls.map((v) => v.quality).join(", ")}\n\n*Select download type:*`,
                 footer: botFooter,
-                image: thumbnail,
+                image: { url: thumbnail },
                 buttons: buttons,
             });
 
@@ -733,7 +733,7 @@ gmd(
                 title: `${botName} INSTAGRAM DOWNLOADER`,
                 text: `*Select download type:*`,
                 footer: botFooter,
-                image: thumbnail,
+                image: { url: thumbnail },
                 buttons: [
                     { id: `ig_video_${dateNow}`, text: "Video" },
                     { id: `ig_audio_${dateNow}`, text: "Audio Only" },
@@ -896,7 +896,7 @@ gmd(
                 title: `${botName} SNACK VIDEO`,
                 text: `*Title:* ${title || "Snack Video"}\n*Author:* ${author || "Unknown"}\n*Likes:* ${like || "0"}\n\n*Select download type:*`,
                 footer: botFooter,
-                image: thumbnail,
+                image: { url: thumbnail },
                 buttons: [
                     { id: `sn_video_${dateNow}`, text: "Video" },
                     { id: `sn_audio_${dateNow}`, text: "Audio Only" },

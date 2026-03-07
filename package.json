@@ -4,14 +4,11 @@
   "description": "Atassa-Md, a Multi Device Whatsapp Bot built by Gifted Tech to Enhance Whatsapp Communication Experience",
   "main": "./index.js",
   "type": "commonjs",
-  "engines": {
-    "npm": "10.x",
-    "node": "20.x"
-  },
   "scripts": {
-    "start": "pm2 start index.js --name atassamd",
+    "start": "pm2 start index.js --deep-monitoring --attach --name atassamd",
     "stop": "pm2 stop atassamd",
-    "restart": "pm2 restart atassamd"
+    "restart": "pm2 restart atassamd && pm2 logs",
+    "stash": "git stash && git stash drop"
   },
   "keywords": [
     "mauricegift",

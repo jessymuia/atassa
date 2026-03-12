@@ -65,7 +65,7 @@ gmd(
       }
       await setSetting("AUTO_LIKE_STATUS", value);
       await react("✅");
-      await reply(`✅ Auto like status set to: *${formatBoolDisplay(value)}*`);
+      await reply(`✅ Auto like status set to: *${formatBoolDisplay(value)}*\n\n⚠️ Note: Auto like only works when auto view is also *ON*`);
     } catch (error) {
       await reply(`❌ Error: ${error.message}`);
     }

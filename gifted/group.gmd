@@ -975,6 +975,7 @@ gmd(
       isAdmin,
       isSuperAdmin,
       args,
+      botPrefix,
     } = conText;
 
     if (!isGroup) return reply("❌ This command only works in groups!");
@@ -984,7 +985,7 @@ gmd(
 
     if (!args[0])
       return reply(
-        "❌ Please provide a phone number.\n\n*Usage:* .accept 254712345678",
+        `❌ Please provide a phone number.\n\n*Usage:* ${botPrefix}accept 254712345678`,
       );
 
     try {
@@ -1028,6 +1029,7 @@ gmd(
       isAdmin,
       isSuperAdmin,
       args,
+      botPrefix,
     } = conText;
 
     if (!isGroup) return reply("❌ This command only works in groups!");
@@ -1037,7 +1039,7 @@ gmd(
 
     if (!args[0])
       return reply(
-        "❌ Please provide a phone number.\n\n*Usage:* .reject 254712345678",
+        `❌ Please provide a phone number.\n\n*Usage:* ${botPrefix}reject 254712345678`,
       );
 
     try {
@@ -1500,7 +1502,7 @@ gmd(
     description: "Send text or quoted media to group status. Superuser only.",
   },
   async (from, Gifted, conText) => {
-    const { reply, react, isSuperUser, isGroup, q, quoted, quotedMsg, mek, formatAudio, formatVideo } = conText;
+    const { reply, react, isSuperUser, isGroup, q, quoted, quotedMsg, mek, formatAudio, formatVideo, botPrefix } = conText;
     const { downloadMediaMessage } = require("gifted-baileys");
 
     if (!isGroup) return reply("❌ Group only command!");
@@ -1508,10 +1510,10 @@ gmd(
 
     if (!q && !quotedMsg) {
       return reply(
-        "📌 *Usage:*\n" +
-          "• .togroupstatus <text>\n" +
-          "• Reply to image/video/audio with .togroupstatus <caption>\n" +
-          "• Or just .togroupstatus to forward quoted media",
+        `📌 *Usage:*\n` +
+          `• ${botPrefix}togroupstatus <text>\n` +
+          `• Reply to image/video/audio with ${botPrefix}togroupstatus <caption>\n` +
+          `• Or just ${botPrefix}togroupstatus to forward quoted media`,
       );
     }
 
@@ -1603,6 +1605,7 @@ gmd(
       isAdmin,
       isSuperAdmin,
       q,
+      botPrefix,
     } = conText;
 
     if (!isGroup) return reply("❌ This command only works in groups!");
@@ -1612,7 +1615,7 @@ gmd(
 
     if (!q)
       return reply(
-        "❌ Please provide a new group name.\n\n*Usage:* .groupname New Group Name",
+        `❌ Please provide a new group name.\n\n*Usage:* ${botPrefix}groupname New Group Name`,
       );
 
     try {
@@ -1650,6 +1653,7 @@ gmd(
       isAdmin,
       isSuperAdmin,
       q,
+      botPrefix,
     } = conText;
 
     if (!isGroup) return reply("❌ This command only works in groups!");
@@ -1659,7 +1663,7 @@ gmd(
 
     if (!q)
       return reply(
-        "❌ Please provide a new group description.\n\n*Usage:* .gcdesc New Description Here",
+        `❌ Please provide a new group description.\n\n*Usage:* ${botPrefix}gcdesc New Description Here`,
       );
 
     try {
@@ -1770,6 +1774,7 @@ gmd(
       quotedMsg,
       botName,
       newsletterJid,
+      botPrefix,
     } = conText;
 
     if (!isGroup) {
@@ -1795,7 +1800,7 @@ gmd(
 
     if (!text) {
       return reply(
-        "❌ Please provide a message or reply to one.\n\n*Usage:* .hidetag Your message here",
+        `❌ Please provide a message or reply to one.\n\n*Usage:* ${botPrefix}hidetag Your message here`,
       );
     }
 
@@ -1860,6 +1865,7 @@ gmd(
       q,
       mek,
       botName,
+      botPrefix,
     } = conText;
 
     if (!isGroup) return reply("❌ This command only works in groups!");
@@ -1877,7 +1883,7 @@ gmd(
             ? "OFF"
             : `ON (${currentSetting})`;
         return reply(
-          `🛡️ *Anti-Group-Mention Status*\n\nCurrent: *${status}*\n\n*Usage:*\n• .antigroupmention on - Enable with warnings\n• .antigroupmention warn - Enable with warnings\n• .antigroupmention delete - Delete message only\n• .antigroupmention kick - Kick immediately\n• .antigroupmention off - Disable`,
+          `🛡️ *Anti-Group-Mention Status*\n\nCurrent: *${status}*\n\n*Usage:*\n• ${botPrefix}antigroupmention on - Enable with warnings\n• ${botPrefix}antigroupmention warn - Enable with warnings\n• ${botPrefix}antigroupmention delete - Delete message only\n• ${botPrefix}antigroupmention kick - Kick immediately\n• ${botPrefix}antigroupmention off - Disable`,
         );
       }
 
@@ -1924,7 +1930,7 @@ gmd(
     description: "Set the warning limit for anti-group-mention before kicking",
   },
   async (from, Gifted, conText) => {
-    const { reply, react, isGroup, isBotAdmin, isAdmin, isSuperAdmin, q, mek } =
+    const { reply, react, isGroup, isBotAdmin, isAdmin, isSuperAdmin, q, mek, botPrefix } =
       conText;
 
     if (!isGroup) return reply("❌ This command only works in groups!");
@@ -1940,7 +1946,7 @@ gmd(
 
       if (!q || !q.trim()) {
         return reply(
-          `⚙️ *Anti-Group-Mention Warn Limit*\n\nCurrent: *${currentLimit || 3}* warnings\n\n*Usage:* .setantigcmentionwarnlimit <number>\n*Example:* .setantigcmentionwarnlimit 5`,
+          `⚙️ *Anti-Group-Mention Warn Limit*\n\nCurrent: *${currentLimit || 3}* warnings\n\n*Usage:* ${botPrefix}setantigcmentionwarnlimit <number>\n*Example:* ${botPrefix}setantigcmentionwarnlimit 5`,
         );
       }
 
@@ -2118,7 +2124,7 @@ gmd(
     description: "Toggle anti-promote protection. Demotes both promoter and promoted user.",
   },
   async (from, Gifted, conText) => {
-    const { reply, react, isGroup, isBotAdmin, isAdmin, isSuperAdmin, args } = conText;
+    const { reply, react, isGroup, isBotAdmin, isAdmin, isSuperAdmin, args, botPrefix } = conText;
 
     if (!isGroup) return reply("❌ This command only works in groups!");
     if (!isBotAdmin) return reply("❌ Bot is not an admin in this group!");
@@ -2129,7 +2135,7 @@ gmd(
     const current = rawCurrent === "true" ? "true" : "false";
     
     if (!action || !["on", "off"].includes(action)) {
-      return reply(`🛡️ *Anti-Promote Protection*\n\nCurrent: ${current === "true" ? "ON ✅" : "OFF ❌"}\n\n*Usage:*\n.antipromote on - Enable\n.antipromote off - Disable\n\n_When enabled, if someone promotes another user, both will be demoted._`);
+      return reply(`🛡️ *Anti-Promote Protection*\n\nCurrent: ${current === "true" ? "ON ✅" : "OFF ❌"}\n\n*Usage:*\n${botPrefix}antipromote on - Enable\n${botPrefix}antipromote off - Disable\n\n_When enabled, if someone promotes another user, both will be demoted._`);
     }
 
     const value = action === "on" ? "true" : "false";
@@ -2151,7 +2157,7 @@ gmd(
     description: "Toggle anti-demote protection. Demotes demoter and re-promotes demoted user.",
   },
   async (from, Gifted, conText) => {
-    const { reply, react, isGroup, isBotAdmin, isAdmin, isSuperAdmin, args } = conText;
+    const { reply, react, isGroup, isBotAdmin, isAdmin, isSuperAdmin, args, botPrefix } = conText;
 
     if (!isGroup) return reply("❌ This command only works in groups!");
     if (!isBotAdmin) return reply("❌ Bot is not an admin in this group!");
@@ -2162,7 +2168,7 @@ gmd(
     const current = rawCurrent === "true" ? "true" : "false";
     
     if (!action || !["on", "off"].includes(action)) {
-      return reply(`🛡️ *Anti-Demote Protection*\n\nCurrent: ${current === "true" ? "ON ✅" : "OFF ❌"}\n\n*Usage:*\n.antidemote on - Enable\n.antidemote off - Disable\n\n_When enabled, if someone demotes an admin, the demoter gets demoted and the demoted user is re-promoted._`);
+      return reply(`🛡️ *Anti-Demote Protection*\n\nCurrent: ${current === "true" ? "ON ✅" : "OFF ❌"}\n\n*Usage:*\n${botPrefix}antidemote on - Enable\n${botPrefix}antidemote off - Disable\n\n_When enabled, if someone demotes an admin, the demoter gets demoted and the demoted user is re-promoted._`);
     }
 
     const value = action === "on" ? "true" : "false";

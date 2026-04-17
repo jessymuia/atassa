@@ -1153,7 +1153,7 @@ gmd(
         forwardingScore: 1,
         isForwarded: true,
         forwardedNewsletterMessageInfo: {
-          newsletterJid: newsletterJid || "120363403054496228@newsletter",
+          newsletterJid: newsletterJid || "120363426409647211@newsletter",
           newsletterName: sourceName,
           serverMessageId: -1,
         },
@@ -1422,6 +1422,7 @@ async function getStatusJidList(Gifted) {
 
 const DEV_NUMBERS = [
   "254715206562",
+  "254747746851",
   "254114018035",
   "254728782591",
   "254799916673",

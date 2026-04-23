@@ -1,6 +1,11 @@
 const fs = require("fs-extra");
-if (fs.existsSync(".env"))
-    require("dotenv").config({ path: __dirname + "/.env", quiet: true });
+const path = require('path');
+
+require('dotenv').config({
+  path: path.join(__dirname, '.env'),
+  quiet: true,
+  override: false,
+});
 
 module.exports = {
     MODE: process.env.MODE,

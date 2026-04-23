@@ -293,7 +293,7 @@ pm2 restart atassa-md
 <summary>𝗖𝗟𝗜𝗖𝗞 𝗛𝗘𝗥𝗘</summary>
   
 - **[CONTACT SUPPORT](https://api.giftedtech.co.ke/contact) For More Info**
-- **Join [WHATSAPP CHANNEL](https://whatsapp.com/channel/0029Vb6lNd511ulWbxu1cT3A) for Daily Updates.**
+- **Join [WHATSAPP CHANNEL](https://whatsapp.com/channel/0029VbCpYtZLtOj5LDuj7Q1p) for Daily Updates.**
 - **Check out my [Website Profile](https://me.giftedtech.co.ke) for More Projects.**
 </details>
 

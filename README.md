@@ -43,7 +43,7 @@
 
 <details>
 <summary>GET YOUR SESSION_ID</summary>
-<a href="https://session.giftedtech.co.ke"><img src="https://img.shields.io/badge/CLICK%20HERE-green" alt="Pairing Code" width="150"></a>
+<a href="https://session.gifted.co.ke"><img src="https://img.shields.io/badge/CLICK%20HERE-green" alt="Pairing Code" width="150"></a>
 
 - Session ID must start with **Gifted~**
 </details>
@@ -67,7 +67,7 @@
 **(B) HOST ON GIFTED HOST**
 <details>
 <summary>TAP TO OPEN</summary>
-<a href="https://panel.giftedtech.co.ke"><img src="https://img.shields.io/badge/GIFTEDHOST%20SIGNUP-green" alt="Gifted Host" width="150"></a>
+<a href="https://panel.gifted.co.ke"><img src="https://img.shields.io/badge/GIFTEDHOST%20SIGNUP-green" alt="Gifted Host" width="150"></a>
 
 <a href="https://youtu.be/YG3-oV2cVj8?feature=shared"><img src="https://img.shields.io/badge/WATCH%20TUTORIAL-red" alt="Gifted Panel Tutorial" width="150"></a>
 </details>
@@ -292,9 +292,9 @@ pm2 restart atassa-md
 <details>
 <summary>𝗖𝗟𝗜𝗖𝗞 𝗛𝗘𝗥𝗘</summary>
   
-- **[CONTACT SUPPORT](https://api.giftedtech.co.ke/contact) For More Info**
+- **[CONTACT SUPPORT](https://api.gifted.co.ke/contact) For More Info**
 - **Join [WHATSAPP CHANNEL](https://whatsapp.com/channel/0029VbCpYtZLtOj5LDuj7Q1p) for Daily Updates.**
-- **Check out my [Website Profile](https://me.giftedtech.co.ke) for More Projects.**
+- **Check out my [Website Profile](https://me.gifted.co.ke) for More Projects.**
 </details>
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
